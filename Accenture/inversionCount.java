@@ -15,69 +15,69 @@ Output: 5
 Inversion pairs: (20,6), (20,5), (20,4), (6,4), (6,5)
 */
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
-    public static int InversionCount(int[] A, int n) {
-        if (A == null) return -1;
-        if (n < 2) return 0;
+    private static int merge(int[] arr, int low, int mid, int high) {
+        ArrayList<Integer> temp = new ArrayList<>();
+        int left = low;
+        int right = mid + 1;
+        int cnt = 0;
 
-        int[] temp = new int[n];
-        return mergeSortAndCount(A, temp, 0, n - 1);
-    }
-
-    private static int mergeSortAndCount(int[] A, int[] temp, int left, int right) {
-        int mid, invCount = 0;
-        if (left < right) {
-            mid = (left + right) / 2;
-
-            invCount += mergeSortAndCount(A, temp, left, mid);
-            invCount += mergeSortAndCount(A, temp, mid + 1, right);
-            invCount += mergeAndCount(A, temp, left, mid, right);
-        }
-        return invCount;
-    }
-
-    private static int mergeAndCount(int[] A, int[] temp, int left, int mid, int right) {
-        int i = left;
-        int j = mid + 1;
-        int k = left;
-        int invCount = 0;
-
-        while (i <= mid && j <= right) {
-            if (A[i] <= A[j]) {
-                temp[k++] = A[i++];
+        while (left <= mid && right <= high) {
+            if (arr[left] <= arr[right]) {
+                temp.add(arr[left]);
+                left++;
             } else {
-                temp[k++] = A[j++];
-                invCount += (mid - i + 1);
+                temp.add(arr[right]);
+                cnt += (mid - left + 1);
+                right++;
             }
         }
 
-        while (i <= mid) {
-            temp[k++] = A[i++];
+        while (left <= mid) {
+            temp.add(arr[left]);
+            left++;
         }
 
-        while (j <= right) {
-            temp[k++] = A[j++];
+        while (right <= high) {
+            temp.add(arr[right]);
+            right++;
         }
 
-        for (i = left; i <= right; i++) {
-            A[i] = temp[i];
+        for (int i = low; i <= high; i++) {
+            arr[i] = temp.get(i - low);
         }
+        return cnt;
+    }
 
-        return invCount;
+    public static int mergeSort(int[] arr, int low, int high) {
+        int cnt = 0;
+        if (low >= high) return cnt;
+        int mid = (low + high) / 2;
+        cnt += mergeSort(arr, low, mid);
+        cnt += mergeSort(arr, mid + 1, high);
+        cnt += merge(arr, low, mid, high);
+        return cnt;
+    }
+
+    public static int numberOfInversions(int[] a, int n) {
+        return mergeSort(a, 0, n - 1);
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         int n = scanner.nextInt();
-        
-        int[] A = new int[n];
+        int[] a = new int[n];
+
         for (int i = 0; i < n; i++) {
-            A[i] = scanner.nextInt();
+            a[i] = scanner.nextInt();
         }
 
-        System.out.println(InversionCount(A, n));
+        int cnt = numberOfInversions(a, n);
+        System.out.println(cnt);
     }
 }
+
