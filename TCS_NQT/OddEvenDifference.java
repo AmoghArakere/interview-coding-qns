@@ -1,5 +1,5 @@
 /*
-create a program that takes a number as input, calculates the sum of digits at odd positions and even positions separately, and then finds their difference.
+Create a program that takes a number as input, calculates the sum of digits at odd positions and even positions separately, and then finds their difference.
 Enter a number (up to 100 digits): 4567
 Output: 2
 */
@@ -10,7 +10,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a number (up to 100 digits): ");
         String input = scanner.nextLine();
-        scanner.close();
 
         int result = calculateDifference(input);
         System.out.println("Output: " + result);
