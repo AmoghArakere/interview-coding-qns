@@ -3,6 +3,9 @@ Create a program that takes a number as input, calculates the sum of digits at o
 Enter a number (up to 100 digits): 4567
 Output: 2
 */
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
 import java.util.Scanner;
 
 public class Main {
@@ -20,7 +23,7 @@ public class Main {
         int evenSum = 0;
 
         for (int i = 0; i < number.length(); i++) {
-            int digit = Character.getNumericValue(number.charAt(i));
+            int digit = number.charAt(i) - '0';
             if (i % 2 == 0) {
                 oddSum += digit;  // odd position
             } else {
