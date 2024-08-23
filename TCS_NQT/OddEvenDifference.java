@@ -3,9 +3,6 @@ Create a program that takes a number as input, calculates the sum of digits at o
 Enter a number (up to 100 digits): 4567
 Output: 2
 */
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
-
 import java.util.Scanner;
 
 public class Main {
