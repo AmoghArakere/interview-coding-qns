@@ -51,18 +51,24 @@ public class Main {
             System.out.println("Number of Students part of merit list are: " + ans);
         }
         
+        // Remove duplicates and keep only the first occurrence
+        Set<Integer> uniqueElements = new LinkedHashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            uniqueElements.add(arr[i]);
+        }
+        
         // Convert the LinkedHashSet back to an array
-        int[] resultArray = new int[uniqueElements.size()];
+        int[] uniqueArray = new int[uniqueElements.size()];
         int index = 0;
         for (int value : uniqueElements) {
-            resultArray[index++] = value;
+            uniqueArray[index++] = value;
         }
         
         // Print the final state of the array
         System.out.print("Final state of the array: ");
-        for (int i = 0; i < resultArray.length; i++) {
-            System.out.print(resultArray[i] + " ");
+        for (int i = 0; i < uniqueArray.length; i++) {
+            System.out.print(uniqueArray[i] + " ");
         }
-        }
+    
     }
 }
