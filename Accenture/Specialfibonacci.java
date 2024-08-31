@@ -34,6 +34,7 @@ public class FindFofN {
         // Printing the result
         System.out.println("The value of f(" + n + ") is: " + result);
     }
+}
   /*
 Enter value for a: 2
 Enter value for b: 3
